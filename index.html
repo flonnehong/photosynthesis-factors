@@ -1,0 +1,863 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>광합성에 영향을 주는 요인</title>
+<meta name="description" content="중학교 2학년 과학 Ⅴ. 식물과 에너지 - 광합성에 영향을 주는 요인 1차시 탐구 수업 자료">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f6ef; --surface:#ffffff; --surface-2:#eef0e6; --ink:#1d2120; --ink-2:#555c58; --line:#d8dccd;
+  --accent:#2f8a4e; --accent-ink:#ffffff; --leaf:#3f9d4f; --leaf-2:#2c7a3b; --water:#cfe6f2; --water-edge:#8fb9cf;
+  --bubble:#ffffff; --lamp:#f2b632; --ray:#ffd75e; --warm:#e0683a; --cool:#3f7fd1;
+  --ok:#1f8a53; --bad:#c23b3b; --warn-bg:#fff6dd; --canvas:#fbfcf8; --grid:#e8ebe0; --data:#2f6fd3;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#141815; --surface:#1d221f; --surface-2:#262c28; --ink:#eceeea; --ink-2:#a7aea9; --line:#353c37;
+    --accent:#62c983; --accent-ink:#0d1a12; --leaf:#5cbf6b; --leaf-2:#3f9d4f; --water:#1f3a48; --water-edge:#4d7b92;
+    --bubble:#e8f6ff; --lamp:#f5c451; --ray:#ffd75e; --warm:#ff8a5c; --cool:#6fa6ff;
+    --ok:#4fd18c; --bad:#ff7a7a; --warn-bg:#2e2a1c; --canvas:#191d1a; --grid:#262c28; --data:#79a8ff;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#141815; --surface:#1d221f; --surface-2:#262c28; --ink:#eceeea; --ink-2:#a7aea9; --line:#353c37;
+  --accent:#62c983; --accent-ink:#0d1a12; --leaf:#5cbf6b; --leaf-2:#3f9d4f; --water:#1f3a48; --water-edge:#4d7b92;
+  --bubble:#e8f6ff; --lamp:#f5c451; --ray:#ffd75e; --warm:#ff8a5c; --cool:#6fa6ff;
+  --ok:#4fd18c; --bad:#ff7a7a; --warn-bg:#2e2a1c; --canvas:#191d1a; --grid:#262c28; --data:#79a8ff;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",system-ui,-apple-system,"Malgun Gothic",sans-serif;line-height:1.65;font-size:17px}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+header.hero{padding:40px 0 24px}
+.unit{font-size:14px;color:var(--ink-2);font-weight:500;letter-spacing:.02em}
+h1{font-size:clamp(30px,6vw,46px);font-weight:900;margin:6px 0 10px;letter-spacing:-.02em}
+h2{font-size:clamp(22px,4vw,28px);margin:0 0 6px;letter-spacing:-.01em}
+h3{font-size:18px;margin:18px 0 6px}
+p{margin:8px 0}
+.lead{font-size:18px;color:var(--ink-2);max-width:680px}
+nav.steps{position:sticky;top:0;z-index:10;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(6px);border-bottom:1px solid var(--line)}
+nav.steps .wrap{display:flex;gap:6px;overflow-x:auto;padding-top:10px;padding-bottom:10px;scrollbar-width:none}
+nav.steps a{flex:0 0 auto;text-decoration:none;color:var(--ink-2);font-size:14px;font-weight:500;padding:6px 12px;border-radius:999px;border:1px solid var(--line);background:var(--surface)}
+nav.steps a.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+section{padding:36px 0 8px;scroll-margin-top:56px}
+.tag{display:inline-block;font-size:13px;font-weight:700;color:var(--accent);margin-bottom:4px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;margin:14px 0}
+.question{background:var(--warn-bg);border-radius:16px;padding:18px 20px;margin:14px 0;font-weight:700;font-size:19px}
+.question small{display:block;font-weight:400;font-size:15px;color:var(--ink-2);margin-top:4px}
+.goal{border-left:4px solid var(--accent);padding:4px 0 4px 14px;margin:12px 0;color:var(--ink-2)}
+canvas{display:block;width:100%;height:auto;border-radius:12px;background:var(--canvas);border:1px solid var(--line);touch-action:manipulation}
+.controls{display:flex;flex-wrap:wrap;gap:10px 18px;align-items:center;margin-top:12px}
+.ctrl{display:flex;align-items:center;gap:8px;font-size:15px}
+.ctrl input[type=range]{width:150px;accent-color:var(--accent)}
+.ctrl b{min-width:58px}
+button{font:inherit;font-size:15px;font-weight:500;border-radius:10px;border:1px solid var(--line);background:var(--surface-2);color:var(--ink);padding:8px 14px;cursor:pointer}
+button:hover:not(:disabled){border-color:var(--accent)}
+button:disabled{opacity:.5;cursor:not-allowed}
+button.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+button.on{background:var(--ok);border-color:var(--ok);color:#fff}
+label.chk{display:flex;align-items:center;gap:6px;font-size:15px;cursor:pointer}
+label.chk input{accent-color:var(--accent);width:18px;height:18px}
+.predict{margin:12px 0}
+.predict .opts{display:flex;flex-wrap:wrap;gap:8px;margin-top:8px}
+.predict .opts button.picked{outline:2px solid var(--accent)}
+.hint{font-size:15px;color:var(--ink-2)}
+.msg{font-size:15px;font-weight:500;min-height:1.6em;margin-top:8px}
+.msg.warn{color:var(--bad)}
+.msg.good{color:var(--ok)}
+.concept{background:var(--surface-2);border-radius:14px;padding:14px 18px;margin:14px 0}
+.concept b.key{color:var(--accent)}
+textarea{width:100%;min-height:80px;font:inherit;font-size:16px;padding:10px 12px;border-radius:12px;border:1px solid var(--line);background:var(--surface);color:var(--ink);resize:vertical}
+table{width:100%;border-collapse:collapse;font-size:15px;margin-top:10px}
+th,td{border-bottom:1px solid var(--line);padding:6px 8px;text-align:center}
+th{color:var(--ink-2);font-weight:500}
+td.warnc{color:var(--bad);font-weight:700}
+.tabs{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 4px}
+.tabs button{border-radius:999px}
+.tabs button.picked{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.seg{display:inline-flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.seg button{padding:5px 10px;font-size:14px}
+.seg button.picked{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+tr.right td:first-child{color:var(--ok);font-weight:700}
+tr.wrong td:first-child{color:var(--bad);font-weight:700}
+.quiz .q{margin:18px 0}
+.quiz .q p{font-weight:500}
+.quiz .choices{display:grid;gap:8px}
+.quiz .choices button{text-align:left}
+.quiz .choices button.correct{background:color-mix(in srgb,var(--ok) 18%,var(--surface));border-color:var(--ok)}
+.quiz .choices button.wrong{background:color-mix(in srgb,var(--bad) 15%,var(--surface));border-color:var(--bad)}
+.quiz .fb{font-size:15px;margin-top:6px;color:var(--ink-2)}
+.score{font-weight:700;font-size:18px}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.grid3 .card{margin:0}
+@media (max-width:760px){.grid3{grid-template-columns:1fr}}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}.ctrl input[type=range]{width:120px}}
+details{margin:12px 0}
+summary{cursor:pointer;font-weight:500}
+footer{padding:40px 0 60px;color:var(--ink-2);font-size:14px}
+.theme-btn{position:fixed;right:14px;bottom:14px;z-index:20;border-radius:999px;padding:8px 12px;box-shadow:0 2px 8px rgba(0,0,0,.12)}
+.tbl-scroll{overflow-x:auto}
+</style>
+</head>
+<body>
+
+<header class="hero wrap">
+  <div class="unit">중학교 2학년 과학 · Ⅴ. 식물과 에너지 · 광합성</div>
+  <h1>광합성에 영향을 주는 요인</h1>
+  <p class="lead">빛, 이산화 탄소, 온도를 바꾸면 광합성은 어떻게 달라질까요? 가상 실험실에서 <b>검정말</b>로 직접 실험하고, 결과를 그래프로 나타내 봅시다.</p>
+</header>
+
+<nav class="steps" aria-label="수업 단계">
+  <div class="wrap">
+    <a href="#intro">① 생각 열기</a>
+    <a href="#design">② 실험 설계</a>
+    <a href="#lab">③ 가상 실험</a>
+    <a href="#analyze">④ 결과 해석</a>
+    <a href="#quiz">⑤ 확인 문제</a>
+    <a href="#wrap">⑥ 정리</a>
+  </div>
+</nav>
+
+<main class="wrap">
+
+<!-- ① 도입 -->
+<section id="intro">
+  <span class="tag">① 생각 열기</span>
+  <h2>겨울에도 딸기가 잘 자라는 비닐하우스의 비밀</h2>
+  <p>딸기 농가의 비닐하우스에는 밤에 켜 두는 <b>조명</b>, 따뜻하게 해 주는 <b>난방기</b>, 그리고 <b>이산화 탄소 발생기</b>가 있는 경우가 많아요. 농부들은 왜 이런 장치를 쓸까요?</p>
+  <div class="question">비닐하우스에서 딸기가 광합성을 더 많이 하게 하려면 어떤 조건을 조절해야 할까?
+    <small>지금 생각을 적어 두고, 수업 마지막에 다시 확인해 봅시다.</small></div>
+  <textarea id="firstIdea" placeholder="내 생각: "></textarea>
+  <div class="card">
+    <b>알고 있는 것 확인하기</b>
+    <ul>
+      <li><b>광합성</b>: 식물이 빛에너지를 이용해 <b>물</b>과 <b>이산화 탄소</b>로 <b>포도당</b>을 만드는 과정. 이때 <b>산소</b>가 함께 생긴다.</li>
+      <li>광합성은 주로 잎의 세포 안에 있는 <b>엽록체</b>에서 일어난다.</li>
+      <li>물속에 사는 식물인 <b>검정말</b>에 빛을 비추면 잎과 줄기에서 <b>기포</b>가 생기는데, 이 기포는 광합성으로 만들어진 <b>산소</b>이다. → 기포가 많이 생길수록 광합성이 활발하다!</li>
+    </ul>
+    <p class="hint" style="margin:6px 0 0">이산화 탄소 + 물 —(빛에너지, 엽록체)→ 포도당 + 산소</p>
+  </div>
+</section>
+
+<!-- ② 실험 설계 -->
+<section id="design">
+  <span class="tag">② 실험 설계</span>
+  <h2>공정한 실험을 설계해 보자</h2>
+  <p class="goal">학습 목표: 광합성에 영향을 주는 요인을 알아보는 실험에서 변인을 구분하고 통제할 수 있다.</p>
+
+  <div class="card">
+    <b>실험 장치</b>
+    <ul>
+      <li>비커에 <b>탄산수소 나트륨 수용액</b>을 넣고 검정말을 넣는다. → 탄산수소 나트륨은 물에 <b>이산화 탄소를 공급</b>해 준다.</li>
+      <li>전등으로 빛을 비추고, <b>1분 동안 발생하는 기포 수</b>를 센다.</li>
+      <li>전등과 비커 사이의 <b>거리</b>를 바꾸면 검정말이 받는 <b>빛의 세기</b>가 달라진다. 가까울수록 빛이 세다.</li>
+    </ul>
+    <p class="hint">⚠ 백열전구처럼 열이 많이 나는 전등을 가까이 두면 물의 온도도 함께 올라가요. 그래서 실제 실험에서는 <b>LED 전등</b>을 쓰거나, 전등과 비커 사이에 <b>물을 담은 수조</b>를 두어 열을 막습니다.</p>
+  </div>
+
+  <div class="card">
+    <b>변인 구분하기</b> <span class="hint">— 「빛의 세기와 광합성」 실험에서 각 항목은 어떤 변인일까요?</span>
+    <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>항목</th><th>변인의 종류</th></tr></thead>
+      <tbody id="varRows"></tbody>
+    </table>
+    </div>
+    <div class="controls"><button id="varCheck" class="primary">확인하기</button><button id="varReset">다시 하기</button></div>
+    <div class="msg" id="varMsg"></div>
+  </div>
+
+  <div class="concept">
+    <p><b class="key">개념 정리</b></p>
+    <p><b>조작 변인</b>: 실험에서 일부러 바꾸는 조건 · <b>종속 변인</b>: 조작 변인에 따라 달라지는 결과(측정하는 값) · <b>통제 변인</b>: 공정한 비교를 위해 똑같이 유지하는 조건</p>
+    <p>알아보려는 조건 <b>한 가지만</b> 바꾸고 나머지는 모두 같게 해야, 결과가 달라진 까닭이 그 조건 때문이라고 말할 수 있다.</p>
+  </div>
+</section>
+
+<!-- ③ 가상 실험 -->
+<section id="lab">
+  <span class="tag">③ 가상 실험</span>
+  <h2>검정말 가상 실험실</h2>
+  <p class="goal">학습 목표: 빛의 세기, 이산화 탄소의 농도, 온도가 광합성에 미치는 영향을 실험으로 확인할 수 있다.</p>
+
+  <p><b>탐구 과제를 하나 고르세요.</b> 과제마다 결과표와 그래프가 따로 만들어져요.</p>
+  <div class="tabs" id="missionTabs">
+    <button data-m="light" class="picked">💡 탐구 1: 빛의 세기</button>
+    <button data-m="co2">🧪 탐구 2: 이산화 탄소의 농도</button>
+    <button data-m="temp">🌡 탐구 3: 온도</button>
+  </div>
+  <p class="hint" id="missionGuide"></p>
+
+  <div class="predict card" id="predictBox">
+    <b>예상해 보기</b> <span id="predictQ"></span>
+    <div class="opts" id="predictOpts"></div>
+    <div class="hint" id="predictMsg">예상을 고른 다음 실험으로 확인해 보세요.</div>
+  </div>
+
+  <canvas id="c1" aria-label="검정말 광합성 실험 시뮬레이션"></canvas>
+  <div class="controls">
+    <button id="lampBtn">💡 전등 끄기</button>
+    <div class="ctrl">전등과의 거리 <input type="range" id="sD" min="10" max="50" step="5" value="20"><b id="sDv">20 cm</b></div>
+  </div>
+  <div class="controls">
+    <div class="ctrl">탄산수소 나트륨 <input type="range" id="sC" min="0" max="2" step="0.25" value="1"><b id="sCv">1 %</b></div>
+    <div class="ctrl">물의 온도 <input type="range" id="sT" min="10" max="45" step="5" value="25"><b id="sTv">25 °C</b></div>
+  </div>
+  <div class="controls">
+    <button id="measureBtn" class="primary">⏱ 1분 동안 기포 세기</button>
+    <button id="recBtn" disabled>📋 결과 기록</button>
+  </div>
+  <div class="msg" id="labMsg"></div>
+  <p class="hint">💡 가상 실험에서는 시간이 <b>6배 빠르게</b> 흘러요. 10초를 기다리면 1분 동안 생긴 기포 수가 나옵니다. 측정하는 동안 조건을 바꾸면 측정이 취소돼요.</p>
+
+  <div class="card">
+    <b id="tableTitle">결과표</b> <span class="hint">— 조작 변인을 바꿔 가며 4번 이상 측정하고 기록해 보세요.</span>
+    <div class="tbl-scroll">
+    <table id="tbl">
+      <thead><tr><th>회</th><th id="thX">조작 변인</th><th id="thCtrl">통제 변인</th><th>1분 동안 기포 수</th></tr></thead>
+      <tbody></tbody>
+    </table>
+    </div>
+    <div class="controls"><button id="delLast">마지막 줄 지우기</button><button id="clrTbl">표 지우기</button></div>
+  </div>
+
+  <div class="card">
+    <b>결과 그래프</b>
+    <canvas id="c2" aria-label="실험 결과 그래프" style="margin-top:10px"></canvas>
+    <div class="controls">
+      <label class="chk"><input type="checkbox" id="showTrend"> 경향 곡선 겹쳐 보기 (선생님과 함께)</label>
+    </div>
+  </div>
+</section>
+
+<!-- ④ 결과 해석 -->
+<section id="analyze">
+  <span class="tag">④ 결과 해석</span>
+  <h2>그래프로 규칙 찾기</h2>
+  <p class="goal">학습 목표: 실험 결과를 그래프로 해석하여 광합성에 영향을 주는 요인을 설명할 수 있다.</p>
+  <p>세 가지 탐구의 그래프를 비교해 보고, 아래 질문에 답해 보세요. 내 그래프가 아직 없다면 ③에서 먼저 실험해 보세요.</p>
+
+  <div class="grid3">
+    <div class="card"><b>빛의 세기</b><canvas id="g1" style="margin-top:8px"></canvas></div>
+    <div class="card"><b>이산화 탄소의 농도</b><canvas id="g2" style="margin-top:8px"></canvas></div>
+    <div class="card"><b>온도</b><canvas id="g3" style="margin-top:8px"></canvas></div>
+  </div>
+  <p class="hint">점은 내가 기록한 결과, 점선은 경향 곡선이에요. 경향 곡선은 ③에서 [경향 곡선 겹쳐 보기]를 켜면 함께 보여요.</p>
+
+  <div class="card">
+    <h3 style="margin-top:0">Q1. 빛을 계속 세게 하면 광합성량도 끝없이 늘어날까?</h3>
+    <textarea id="int1" placeholder="그래프에서 빛의 세기가 셀 때 기포 수는 …"></textarea>
+    <h3>Q2. 이산화 탄소 그래프와 빛의 세기 그래프는 어떤 점이 비슷할까?</h3>
+    <textarea id="int2" placeholder="두 그래프 모두 …"></textarea>
+    <h3>Q3. 온도 그래프는 다른 두 그래프와 어떤 점이 다를까?</h3>
+    <textarea id="int3" placeholder="온도가 너무 높아지면 …"></textarea>
+  </div>
+
+  <div class="concept">
+    <p><b class="key">개념 정리</b></p>
+    <p>💡 <b>빛의 세기</b>: 빛이 셀수록 광합성량이 증가하다가, 어느 정도 이상이 되면 더 이상 증가하지 않고 <b>일정해진다</b>.</p>
+    <p>🧪 <b>이산화 탄소의 농도</b>: 농도가 높을수록 광합성량이 증가하다가, 어느 정도 이상이 되면 <b>일정해진다</b>.</p>
+    <p>🌡 <b>온도</b>: 온도가 높아질수록 광합성량이 증가하다가, <b>일정 온도(약 30~35 °C)보다 높아지면 급격히 감소</b>한다. 광합성에 관여하는 물질이 높은 온도에서 제 기능을 하지 못하기 때문이다.</p>
+    <p>→ 광합성은 <b>빛의 세기, 이산화 탄소의 농도, 온도</b>의 영향을 받는다.</p>
+  </div>
+</section>
+
+<!-- ⑤ 퀴즈 -->
+<section id="quiz">
+  <span class="tag">⑤ 확인 문제</span>
+  <h2>스스로 확인하기</h2>
+  <div class="quiz" id="quizBox"></div>
+  <p class="score" id="quizScore"></p>
+  <button id="quizRetry" style="display:none">다시 풀기</button>
+</section>
+
+<!-- ⑥ 정리 -->
+<section id="wrap">
+  <span class="tag">⑥ 정리</span>
+  <h2>처음 질문에 답해 보기</h2>
+  <div class="question">비닐하우스에서 딸기가 광합성을 더 많이 하게 하려면 어떤 조건을 조절해야 할까?</div>
+  <div class="grid2">
+    <div class="card"><b>수업 전 내 생각</b><p id="firstIdeaEcho" class="hint">(① 생각 열기에 적은 내용이 여기에 나타나요)</p></div>
+    <div class="card"><b>지금 내 생각</b><textarea id="finalIdea" placeholder="실험 결과를 근거로 써 보세요."></textarea></div>
+  </div>
+  <details class="card">
+    <summary>모범 답안 보기</summary>
+    <p><b>조명</b>으로 빛의 세기를 높이고, <b>이산화 탄소 발생기</b>로 이산화 탄소의 농도를 높이며, <b>난방과 환기</b>로 온도를 광합성이 잘 일어나는 범위로 유지한다.</p>
+    <p>단, 빛과 이산화 탄소는 어느 정도 이상이 되면 광합성량이 더 늘지 않으므로 지나치게 늘리면 비용만 든다. 또 온도가 너무 높으면 오히려 광합성량이 줄어든다.</p>
+  </details>
+  <details class="card">
+    <summary>교사용: 수업 흐름 (45분)</summary>
+    <div class="tbl-scroll">
+    <table>
+      <thead><tr><th>단계</th><th>시간</th><th>활동</th></tr></thead>
+      <tbody>
+        <tr><td>① 생각 열기</td><td>5분</td><td>비닐하우스 사례, 핵심 질문 제시, 처음 생각 쓰기</td></tr>
+        <tr><td>② 실험 설계</td><td>7분</td><td>실험 장치 이해, 조작·종속·통제 변인 구분</td></tr>
+        <tr><td>③ 가상 실험</td><td>18분</td><td>모둠별로 탐구 1~3 측정 → 결과표·그래프 작성 (모둠마다 탐구를 나눠 맡아도 좋음)</td></tr>
+        <tr><td>④ 결과 해석</td><td>7분</td><td>세 그래프 비교, 경향 곡선 함께 확인, 개념 정리</td></tr>
+        <tr><td>⑤ 확인 문제</td><td>6분</td><td>6문항 자기 점검</td></tr>
+        <tr><td>⑥ 정리</td><td>2분</td><td>핵심 질문에 근거를 들어 답하기</td></tr>
+      </tbody>
+    </table>
+    </div>
+    <p class="hint">시뮬레이션은 개념 이해를 돕기 위해 단순화한 모델이며, 측정할 때마다 기포 수가 조금씩 달라집니다(실제 실험의 오차와 비슷하게). 같은 조건에서 여러 번 측정해 평균을 내는 활동으로 확장할 수 있습니다. 가능하면 실제 검정말 실험과 함께 사용하세요.</p>
+  </details>
+</section>
+</main>
+
+<footer class="wrap">중학교 2학년 과학 Ⅴ. 식물과 에너지 — 광합성에 영향을 주는 요인 · 1차시 탐구 수업 자료</footer>
+<button class="theme-btn" id="themeBtn" aria-label="화면 테마 바꾸기">🌓</button>
+
+<script>
+(() => {
+"use strict";
+
+/* ---------- 공통 유틸 ---------- */
+const $ = id => document.getElementById(id);
+const store = {
+  get(k){ try{ return localStorage.getItem("photo-"+k); }catch(e){ return null; } },
+  set(k,v){ try{ localStorage.setItem("photo-"+k, v); }catch(e){} }
+};
+let C = {};
+function readColors(){
+  const cs = getComputedStyle(document.documentElement);
+  ["ink","ink-2","line","accent","surface","surface-2","leaf","leaf-2","water","water-edge","bubble","lamp","ray","warm","cool","canvas","grid","data","ok","bad"]
+    .forEach(k => C[k] = cs.getPropertyValue("--"+k).trim());
+}
+readColors();
+try{ matchMedia("(prefers-color-scheme: dark)").addEventListener("change", readColors); }catch(e){}
+$("themeBtn").onclick = () => {
+  const root = document.documentElement;
+  const dark = root.dataset.theme ? root.dataset.theme === "dark" : matchMedia("(prefers-color-scheme: dark)").matches;
+  root.dataset.theme = dark ? "light" : "dark";
+  store.set("theme", root.dataset.theme);
+  readColors();
+};
+const savedTheme = store.get("theme");
+if (savedTheme) { document.documentElement.dataset.theme = savedTheme; readColors(); }
+
+function setupCanvas(cv, W, H){
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  cv.width = W*dpr; cv.height = H*dpr;
+  const ctx = cv.getContext("2d");
+  ctx.setTransform(dpr,0,0,dpr,0,0);
+  return ctx;
+}
+function label(ctx, text, x, y, color, size=16, weight=700, align="center"){
+  ctx.fillStyle = color; ctx.font = `${weight} ${size}px "Noto Sans KR", sans-serif`;
+  ctx.textAlign = align; ctx.textBaseline = "middle"; ctx.fillText(text, x, y);
+}
+function roundRect(ctx, x, y, w, h, r){
+  ctx.beginPath(); ctx.moveTo(x+r,y); ctx.arcTo(x+w,y,x+w,y+h,r); ctx.arcTo(x+w,y+h,x,y+h,r);
+  ctx.arcTo(x,y+h,x,y,r); ctx.arcTo(x,y,x+w,y,r); ctx.closePath();
+}
+const fmtNum = v => String(+(+v).toFixed(2));
+
+/* 학생 글 저장 */
+["firstIdea","finalIdea","int1","int2","int3"].forEach(id => {
+  const el = $(id); const v = store.get(id); if (v) el.value = v;
+  el.addEventListener("input", () => { store.set(id, el.value); if (id === "firstIdea") echo(); });
+});
+function echo(){
+  const v = $("firstIdea").value.trim();
+  $("firstIdeaEcho").textContent = v || "(① 생각 열기에 적은 내용이 여기에 나타나요)";
+}
+echo();
+
+/* ---------- ② 변인 구분 ---------- */
+const VARS = [
+  ["전등과 비커 사이의 거리", "조작"],
+  ["1분 동안 발생하는 기포 수", "종속"],
+  ["물의 온도", "통제"],
+  ["탄산수소 나트륨 수용액의 농도", "통제"],
+  ["검정말의 크기와 양", "통제"]
+];
+const varPick = {};
+function buildVars(){
+  const tb = $("varRows"); tb.innerHTML = "";
+  VARS.forEach(([name], i) => {
+    const tr = document.createElement("tr");
+    const td1 = document.createElement("td"); td1.textContent = name; td1.style.textAlign = "left";
+    const td2 = document.createElement("td"); const seg = document.createElement("div"); seg.className = "seg";
+    ["조작","종속","통제"].forEach(k => {
+      const b = document.createElement("button"); b.textContent = k + " 변인";
+      if (varPick[i] === k) b.classList.add("picked");
+      b.onclick = () => { varPick[i] = k; tr.className = ""; [...seg.children].forEach(x => x.classList.toggle("picked", x === b)); $("varMsg").textContent = ""; };
+      seg.appendChild(b);
+    });
+    td2.appendChild(seg); tr.append(td1, td2); tb.appendChild(tr);
+  });
+}
+buildVars();
+$("varCheck").onclick = () => {
+  const rows = [...$("varRows").children]; let ok = 0, n = 0;
+  VARS.forEach(([, ans], i) => {
+    if (varPick[i] === undefined) { rows[i].className = ""; return; }
+    n++; const r = varPick[i] === ans; if (r) ok++;
+    rows[i].className = r ? "right" : "wrong";
+  });
+  const m = $("varMsg");
+  if (n < VARS.length) { m.className = "msg warn"; m.textContent = "아직 고르지 않은 항목이 있어요."; return; }
+  if (ok === VARS.length) { m.className = "msg good"; m.textContent = "🎉 모두 맞았어요! 거리(빛의 세기)만 바꾸고, 나머지는 모두 같게 유지해야 해요."; }
+  else { m.className = "msg warn"; m.textContent = `${VARS.length}개 중 ${ok}개 맞았어요. 빨간 항목을 다시 생각해 보세요. (힌트: 일부러 바꾸는 것은 딱 하나!)`; }
+};
+$("varReset").onclick = () => { Object.keys(varPick).forEach(k => delete varPick[k]); buildVars(); $("varMsg").textContent = ""; };
+
+/* ---------- 광합성 모형 ---------- */
+const relLight = d => 25*(20/d)**2;                 // 빛의 세기(상대값): 거리의 제곱에 반비례, 10 cm → 100
+const fL = I => 1 - Math.exp(-I/25);                // 빛: 증가하다 일정
+const fC = c => 0.05 + 0.95*(1 - Math.exp(-c/0.4)); // CO2: 증가하다 일정 (물에 녹아 있는 소량의 CO2 고려)
+const fT = T => Math.exp(-(((T-32)/(T <= 32 ? 16 : 6))**2)); // 온도: 최적 온도 이후 급감
+const lightOf = s => s.on ? relLight(s.d) : 0;
+const rateOf = s => 60 * fL(lightOf(s)) * fC(s.c) * fT(s.T); // 1분당 기포 수
+
+/* 탐구 과제 정의 */
+const MIS = {
+  light: {
+    title:"탐구 1. 빛의 세기와 광합성", th:"전등 거리 (빛의 세기)", thCtrl:"통제 변인 (농도 · 온도)",
+    guide:"🎯 전등과의 거리만 바꾸고, 탄산수소 나트륨 농도와 물의 온도는 그대로 두세요.",
+    pq:"전등을 아주 가까이(10 cm) 가져가면 기포 수는 어떻게 될까?",
+    po:["거리에 비례해서 계속 크게 늘어난다","늘어나다가 어느 정도 이상에서는 거의 늘지 않는다","오히려 줄어든다"], pa:1,
+    pe:"빛이 세지면 기포가 늘어나지만, 어느 정도 이상에서는 거의 늘지 않아요. 직접 측정해서 확인해 보세요!",
+    x:s => lightOf(s), xmin:0, xmax:100, ticks:[0,20,40,60,80,100],
+    xlabel:"빛의 세기 (상대값)", short:"빛의 세기",
+    fmt:s => s.on ? `${s.d} cm (빛 ${Math.round(relLight(s.d))})` : "전등 꺼짐 (빛 0)",
+    ctrl:s => `${fmtNum(s.c)} % · ${s.T} °C`,
+    curve:(x,s) => 60*fL(x)*fC(s.c)*fT(s.T)
+  },
+  co2: {
+    title:"탐구 2. 이산화 탄소의 농도와 광합성", th:"탄산수소 나트륨 농도", thCtrl:"통제 변인 (거리 · 온도)",
+    guide:"🎯 탄산수소 나트륨 농도만 바꾸고, 전등과의 거리와 물의 온도는 그대로 두세요.",
+    pq:"탄산수소 나트륨을 넣지 않은 물(0 %)에서는 기포가 어떻게 될까?",
+    po:["넣었을 때보다 훨씬 적게 생긴다","넣었을 때와 똑같이 생긴다","더 많이 생긴다"], pa:0,
+    pe:"이산화 탄소가 부족하면 빛이 충분해도 광합성이 잘 일어나지 않아요.",
+    x:s => s.c, xmin:0, xmax:2, ticks:[0,0.5,1,1.5,2],
+    xlabel:"탄산수소 나트륨 농도 (%)", short:"농도",
+    fmt:s => `${fmtNum(s.c)} %`,
+    ctrl:s => `${s.on ? s.d+" cm" : "전등 꺼짐"} · ${s.T} °C`,
+    curve:(x,s) => 60*fL(lightOf(s))*fC(x)*fT(s.T)
+  },
+  temp: {
+    title:"탐구 3. 온도와 광합성", th:"물의 온도", thCtrl:"통제 변인 (거리 · 농도)",
+    guide:"🎯 물의 온도만 바꾸고, 전등과의 거리와 탄산수소 나트륨 농도는 그대로 두세요.",
+    pq:"물의 온도를 45 °C까지 높이면 기포 수는 어떻게 될까?",
+    po:["온도가 높을수록 계속 늘어난다","늘어나다가 일정해진다","어느 온도까지는 늘다가 그 이상에서는 크게 줄어든다"], pa:2,
+    pe:"온도는 빛·이산화 탄소와 달리, 너무 높으면 광합성이 오히려 줄어들어요.",
+    x:s => s.T, xmin:10, xmax:45, ticks:[10,15,20,25,30,35,40,45],
+    xlabel:"물의 온도 (°C)", short:"온도",
+    fmt:s => `${s.T} °C`,
+    ctrl:s => `${s.on ? s.d+" cm" : "전등 꺼짐"} · ${fmtNum(s.c)} %`,
+    curve:(x,s) => 60*fL(lightOf(s))*fC(s.c)*fT(x)
+  }
+};
+const rows = { light:[], co2:[], temp:[] };
+try{ const r = JSON.parse(store.get("rows") || "null"); if (r) Object.keys(rows).forEach(k => { if (Array.isArray(r[k])) rows[k] = r[k]; }); }catch(e){}
+const saveRows = () => store.set("rows", JSON.stringify(rows));
+const predicted = {};
+
+/* ---------- ③ 시뮬레이션 상태 ---------- */
+const st = { on:true, d:20, c:1, T:25, mission:"light",
+  bubbles:[], acc:0, counting:false, tLeft:0, count:0, result:null, snap:null, t:0, showTrend:false };
+const snapNow = () => ({ on:st.on, d:st.d, c:st.c, T:st.T });
+
+function setMsg(text, kind=""){ const m = $("labMsg"); m.textContent = text; m.className = "msg " + kind; }
+
+function cancelIfCounting(){
+  if (st.counting){
+    st.counting = false; st.count = 0;
+    setMsg("⚠ 측정하는 동안 조건이 바뀌어서 측정을 취소했어요. 조건을 정한 뒤 다시 측정하세요.", "warn");
+    uiMeasure();
+  }
+  if (st.result){ st.result = null; uiMeasure(); }
+}
+$("lampBtn").onclick = () => { st.on = !st.on; $("lampBtn").textContent = st.on ? "💡 전등 끄기" : "💡 전등 켜기"; cancelIfCounting(); };
+$("sD").oninput = e => { st.d = +e.target.value; $("sDv").textContent = st.d+" cm"; cancelIfCounting(); };
+$("sC").oninput = e => { st.c = +e.target.value; $("sCv").textContent = fmtNum(st.c)+" %"; cancelIfCounting(); };
+$("sT").oninput = e => { st.T = +e.target.value; $("sTv").textContent = st.T+" °C"; cancelIfCounting(); };
+
+function uiMeasure(){
+  const mb = $("measureBtn");
+  mb.disabled = st.counting;
+  mb.textContent = st.counting ? "⏱ 측정 중…" : "⏱ 1분 동안 기포 세기";
+  $("recBtn").disabled = !st.result;
+}
+$("measureBtn").onclick = () => {
+  st.counting = true; st.tLeft = 10; st.count = 0; st.result = null; st.snap = snapNow();
+  setMsg("측정 중이에요. 기포가 몇 개 생기는지 함께 세어 보세요!");
+  uiMeasure();
+};
+$("recBtn").onclick = () => {
+  if (!st.result) return;
+  const M = MIS[st.mission], list = rows[st.mission], s = st.result.snap;
+  const ctrl = M.ctrl(s);
+  const bad = list.length > 0 && list[0].ctrl !== ctrl;
+  list.push({ s, n:st.result.n, ctrl, bad });
+  saveRows(); st.result = null; uiMeasure(); renderTable();
+  if (bad) setMsg(`⚠ 통제 변인(${ctrl})이 첫 번째 측정(${list[0].ctrl})과 달라요. 이 결과는 공정한 비교가 아니에요!`, "warn");
+  else if (list.length >= 4) setMsg("📈 그래프를 보고 어떤 규칙이 있는지 찾아보세요.", "good");
+  else setMsg(`기록했어요. ${M.short}을(를) 바꿔서 더 측정해 보세요.`);
+};
+$("delLast").onclick = () => { rows[st.mission].pop(); saveRows(); renderTable(); };
+$("clrTbl").onclick = () => { if (!rows[st.mission].length || confirm("이 탐구의 결과표를 모두 지울까요?")) { rows[st.mission] = []; saveRows(); renderTable(); setMsg(""); } };
+$("showTrend").onchange = e => { st.showTrend = e.target.checked; };
+
+function renderTable(){
+  const M = MIS[st.mission];
+  $("tableTitle").textContent = M.title + " — 결과표";
+  $("thX").textContent = M.th; $("thCtrl").textContent = M.thCtrl;
+  const tb = $("tbl").querySelector("tbody"); tb.innerHTML = "";
+  rows[st.mission].forEach((r, i) => {
+    const tr = document.createElement("tr");
+    [String(i+1), M.fmt(r.s), (r.bad ? "⚠ " : "") + r.ctrl, r.n + " 개"].forEach((t, j) => {
+      const td = document.createElement("td"); td.textContent = t; if (j === 2 && r.bad) td.className = "warnc"; tr.appendChild(td);
+    });
+    tb.appendChild(tr);
+  });
+  if (!rows[st.mission].length){
+    const tr = document.createElement("tr"); const td = document.createElement("td"); td.colSpan = 4;
+    td.className = "hint"; td.textContent = "아직 기록이 없어요. 측정한 뒤 [결과 기록]을 누르세요."; tr.appendChild(td); tb.appendChild(tr);
+  }
+}
+function renderPredict(){
+  const M = MIS[st.mission];
+  $("predictQ").textContent = M.pq;
+  const box = $("predictOpts"); box.innerHTML = "";
+  M.po.forEach((t, j) => {
+    const b = document.createElement("button"); b.textContent = t;
+    if (predicted[st.mission] === j) b.classList.add("picked");
+    b.onclick = () => {
+      predicted[st.mission] = j;
+      [...box.children].forEach(x => x.classList.toggle("picked", x === b));
+      $("predictMsg").textContent = "예상을 골랐어요. 이제 측정해서 확인해 보세요! 실험이 끝나면 ④에서 정답을 확인할 수 있어요.";
+    };
+    box.appendChild(b);
+  });
+  $("predictMsg").textContent = predicted[st.mission] === undefined ? "예상을 고른 다음 실험으로 확인해 보세요." : "예상을 골랐어요. 측정해서 확인해 보세요!";
+}
+function setMission(m){
+  st.mission = m;
+  [...$("missionTabs").children].forEach(b => b.classList.toggle("picked", b.dataset.m === m));
+  $("missionGuide").textContent = MIS[m].guide;
+  renderTable(); renderPredict(); setMsg("");
+}
+[...$("missionTabs").children].forEach(b => b.onclick = () => setMission(b.dataset.m));
+setMission("light"); uiMeasure();
+
+/* ---------- 시뮬레이션: 그리기 ---------- */
+const W1 = 720, H1 = 420;
+const ctx1 = setupCanvas($("c1"), W1, H1);
+const BK = { x:440, y:150, w:140, h:210 };      // 비커
+const WATER_Y = 182;                             // 수면
+const PX_PER_CM = 7;
+const TIP = { x:500, y:236 };                    // 검정말 줄기 끝(기포 나오는 곳)
+const specks = Array.from({length:40}, () => ({ x:BK.x+10+Math.random()*(BK.w-20), y:WATER_Y+10+Math.random()*(BK.h-(WATER_Y-BK.y)-20), p:Math.random()*6.28 }));
+
+function step(dt){
+  st.t += dt;
+  const r = rateOf(st);                           // 1분당 기포 수
+  st.acc += (r/60) * 6 * dt * (0.75 + 0.5*Math.random());  // 시간 6배속
+  while (st.acc >= 1){
+    st.acc -= 1;
+    st.bubbles.push({ x:TIP.x + (Math.random()-0.5)*6, y:TIP.y, r:2.5+Math.random()*2.5, ph:Math.random()*6.28 });
+    if (st.counting) st.count++;
+  }
+  for (const b of st.bubbles){ b.y -= (55 + b.r*8)*dt; b.ph += dt*6; }
+  st.bubbles = st.bubbles.filter(b => b.y > WATER_Y + 2);
+  if (st.counting){
+    st.tLeft -= dt;
+    if (st.tLeft <= 0){
+      st.counting = false;
+      st.result = { snap:st.snap, n:st.count };
+      setMsg(`✅ 측정 완료! 1분 동안 기포가 ${st.count}개 생겼어요. [결과 기록]을 눌러 표에 적으세요.`, "good");
+      uiMeasure();
+    }
+  }
+}
+
+function drawLamp(ctx, lx){
+  const ly = 250;
+  // 받침대
+  ctx.strokeStyle = C["ink-2"]; ctx.lineWidth = 4; ctx.lineCap = "round";
+  ctx.beginPath(); ctx.moveTo(lx-18, 358); ctx.lineTo(lx+18, 358); ctx.stroke();
+  ctx.beginPath(); ctx.moveTo(lx, 358); ctx.lineTo(lx, ly+16); ctx.stroke();
+  // 갓
+  ctx.fillStyle = C["ink-2"];
+  ctx.beginPath(); ctx.moveTo(lx-14, ly-26); ctx.lineTo(lx+10, ly-34); ctx.lineTo(lx+10, ly+34); ctx.lineTo(lx-14, ly+26); ctx.closePath(); ctx.fill();
+  // 전구
+  ctx.beginPath(); ctx.arc(lx+14, ly, 14, -Math.PI/2, Math.PI/2);
+  ctx.fillStyle = st.on ? C.lamp : C["surface-2"]; ctx.fill();
+  ctx.strokeStyle = C.line; ctx.lineWidth = 1.5; ctx.stroke();
+  if (st.on){
+    const g = ctx.createRadialGradient(lx+16, ly, 4, lx+16, ly, 46);
+    g.addColorStop(0, "rgba(255,215,94,.55)"); g.addColorStop(1, "rgba(255,215,94,0)");
+    ctx.fillStyle = g; ctx.beginPath(); ctx.arc(lx+16, ly, 46, 0, Math.PI*2); ctx.fill();
+  }
+  label(ctx, "LED 전등", lx, 378, C["ink-2"], 13, 500);
+}
+
+function drawPlant(ctx){
+  // 검정말: 줄기 + 돌려나기 잎 (자른 끝이 위쪽)
+  const pts = [];
+  for (let i = 0; i <= 20; i++){ const t = i/20; pts.push({ x: 512 + Math.sin(t*2.2 + 0.4)*10 - t*12, y: 352 - t*(352 - TIP.y) }); }
+  ctx.strokeStyle = C["leaf-2"]; ctx.lineWidth = 4; ctx.lineCap = "round";
+  ctx.beginPath(); pts.forEach((p, i) => i ? ctx.lineTo(p.x, p.y) : ctx.moveTo(p.x, p.y)); ctx.stroke();
+  ctx.fillStyle = C.leaf;
+  for (let i = 2; i < 20; i += 2){
+    const p = pts[i], sway = Math.sin(st.t*1.2 + i)*0.08;
+    for (const a of [-1.15, -0.55, 0.55, 1.15]){
+      ctx.save(); ctx.translate(p.x, p.y); ctx.rotate(a + sway);
+      ctx.beginPath(); ctx.ellipse(0, -10, 3.2, 10, 0, 0, Math.PI*2); ctx.fill(); ctx.restore();
+    }
+  }
+  // 자른 끝 표시
+  ctx.fillStyle = C["leaf-2"]; ctx.beginPath(); ctx.arc(TIP.x, TIP.y, 3.5, 0, Math.PI*2); ctx.fill();
+}
+
+function drawSim(){
+  const ctx = ctx1; ctx.clearRect(0, 0, W1, H1);
+  const lx = BK.x - st.d*PX_PER_CM;
+  const I = lightOf(st);
+
+  // 실험대
+  ctx.fillStyle = C["surface-2"]; ctx.fillRect(0, 360, W1, 60);
+  ctx.strokeStyle = C.line; ctx.lineWidth = 1; ctx.beginPath(); ctx.moveTo(0, 360); ctx.lineTo(W1, 360); ctx.stroke();
+
+  // 빛
+  if (st.on){
+    ctx.save(); ctx.globalAlpha = 0.10 + 0.32*(I/100);
+    const g = ctx.createLinearGradient(lx+20, 0, BK.x+BK.w*0.6, 0);
+    g.addColorStop(0, C.ray); g.addColorStop(1, "rgba(255,215,94,0)");
+    ctx.fillStyle = g; ctx.beginPath();
+    ctx.moveTo(lx+22, 236); ctx.lineTo(BK.x + 70, WATER_Y - 10); ctx.lineTo(BK.x + 70, 352); ctx.lineTo(lx+22, 264); ctx.closePath(); ctx.fill();
+    ctx.restore();
+  }
+  drawLamp(ctx, lx);
+
+  // 거리 자
+  ctx.strokeStyle = C["ink-2"]; ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.moveTo(lx+14, 396); ctx.lineTo(BK.x, 396); ctx.stroke();
+  [lx+14, BK.x].forEach(x => { ctx.beginPath(); ctx.moveTo(x, 390); ctx.lineTo(x, 402); ctx.stroke(); });
+  label(ctx, `${st.d} cm`, (lx+14+BK.x)/2, 408, C.ink, 13, 700);
+
+  // 비커와 물
+  const wTop = WATER_Y, wBot = BK.y + BK.h;
+  ctx.fillStyle = C.water; ctx.fillRect(BK.x, wTop, BK.w, wBot - wTop);
+  // 온도 느낌(따뜻하면 붉게, 차가우면 푸르게)
+  const tint = (st.T - 25)/20;
+  if (Math.abs(tint) > 0.01){
+    ctx.save(); ctx.globalAlpha = Math.min(0.28, Math.abs(tint)*0.28);
+    ctx.fillStyle = tint > 0 ? C.warm : C.cool; ctx.fillRect(BK.x, wTop, BK.w, wBot - wTop); ctx.restore();
+  }
+  // 탄산수소 나트륨 (농도만큼 작은 알갱이)
+  const nSpeck = Math.round(st.c * 20);
+  ctx.fillStyle = C["water-edge"];
+  for (let i = 0; i < nSpeck; i++){ const s = specks[i]; ctx.globalAlpha = 0.6; ctx.beginPath(); ctx.arc(s.x + Math.sin(st.t + s.p)*2, s.y, 1.4, 0, Math.PI*2); ctx.fill(); }
+  ctx.globalAlpha = 1;
+  // 수면
+  ctx.strokeStyle = C["water-edge"]; ctx.lineWidth = 1.5;
+  ctx.beginPath(); ctx.moveTo(BK.x, wTop); ctx.lineTo(BK.x+BK.w, wTop); ctx.stroke();
+
+  drawPlant(ctx);
+
+  // 기포
+  for (const b of st.bubbles){
+    const x = b.x + Math.sin(b.ph)*1.5;
+    ctx.beginPath(); ctx.arc(x, b.y, b.r, 0, Math.PI*2);
+    ctx.fillStyle = C.bubble; ctx.globalAlpha = 0.85; ctx.fill(); ctx.globalAlpha = 1;
+    ctx.strokeStyle = C["water-edge"]; ctx.lineWidth = 1; ctx.stroke();
+  }
+
+  // 비커 테두리
+  ctx.strokeStyle = C.ink; ctx.lineWidth = 2.2; ctx.lineJoin = "round";
+  ctx.beginPath(); ctx.moveTo(BK.x-6, BK.y); ctx.lineTo(BK.x, BK.y+6); ctx.lineTo(BK.x, wBot); ctx.lineTo(BK.x+BK.w, wBot); ctx.lineTo(BK.x+BK.w, BK.y); ctx.stroke();
+  // 눈금
+  ctx.lineWidth = 1; ctx.strokeStyle = C["ink-2"];
+  for (let i = 0; i < 5; i++){ const y = wBot - 30 - i*30; ctx.beginPath(); ctx.moveTo(BK.x+BK.w-14, y); ctx.lineTo(BK.x+BK.w, y); ctx.stroke(); }
+
+  // 온도계
+  const tx = BK.x + BK.w - 26, tTop = BK.y - 6, tBot = wBot - 14;
+  ctx.fillStyle = C.surface; ctx.strokeStyle = C["ink-2"]; ctx.lineWidth = 1.2;
+  roundRect(ctx, tx-4, tTop, 8, tBot - tTop, 4); ctx.fill(); ctx.stroke();
+  ctx.beginPath(); ctx.arc(tx, tBot + 4, 7, 0, Math.PI*2); ctx.fillStyle = C.warm; ctx.fill();
+  const lvl = tBot - (st.T - 0)/50 * (tBot - tTop - 6);
+  ctx.fillStyle = C.warm; ctx.fillRect(tx-2, lvl, 4, tBot - lvl + 2);
+
+  // 비커 라벨
+  label(ctx, `탄산수소 나트륨 ${fmtNum(st.c)} %`, BK.x + BK.w/2, BK.y - 42, C.ink, 13, 700);
+  label(ctx, `${st.T} °C`, tx, BK.y - 4 - 12, C.warm, 12, 700);
+  label(ctx, "검정말", 470, 340, C["leaf-2"], 12, 700);
+
+  // 측정 패널
+  const px = 600, py = 150, pw = 112, ph = 150;
+  ctx.fillStyle = C.surface; ctx.strokeStyle = C.line; ctx.lineWidth = 1;
+  roundRect(ctx, px, py, pw, ph, 12); ctx.fill(); ctx.stroke();
+  label(ctx, "기포 수", px + pw/2, py + 22, C["ink-2"], 13, 500);
+  let big = "–", sub = "측정 전";
+  if (st.counting){ big = String(st.count); const simSec = Math.min(60, Math.floor((10 - st.tLeft)*6)); sub = `0:${String(simSec).padStart(2,"0")} / 1:00`; }
+  else if (st.result){ big = String(st.result.n); sub = "1분 측정 완료"; }
+  label(ctx, big, px + pw/2, py + 68, st.counting ? C.accent : C.ink, 40, 900);
+  label(ctx, sub, px + pw/2, py + 108, C["ink-2"], 12, 500);
+  if (st.counting){
+    const prog = Math.min(1, (10 - st.tLeft)/10);
+    ctx.fillStyle = C["surface-2"]; roundRect(ctx, px+14, py+124, pw-28, 8, 4); ctx.fill();
+    ctx.fillStyle = C.accent; roundRect(ctx, px+14, py+124, (pw-28)*prog, 8, 4); ctx.fill();
+  }
+
+  // 상단 안내
+  label(ctx, "▶ 시간 6배 빠르게", 16, 22, C["ink-2"], 12, 500, "left");
+  if (!st.on) label(ctx, "전등이 꺼져 있어요", 220, 150, C["ink-2"], 15, 700);
+  if (st.T >= 40) label(ctx, "물이 너무 뜨거워요!", 510, 82, C.warm, 14, 700);
+}
+
+/* ---------- 그래프 ---------- */
+function drawGraph(ctx, W, H, m, opt){
+  const M = MIS[m], list = rows[m];
+  const L = opt.small ? 40 : 60, R = 16, T = 16, B = opt.small ? 40 : 52;
+  const pw = W - L - R, ph = H - T - B, YMAX = 70;
+  const X = v => L + (v - M.xmin)/(M.xmax - M.xmin)*pw, Y = v => T + ph - v/YMAX*ph;
+  ctx.clearRect(0, 0, W, H);
+  const fs = opt.small ? 11 : 13;
+  // 격자
+  ctx.strokeStyle = C.grid; ctx.lineWidth = 1;
+  for (let v = 0; v <= 60; v += 10){ ctx.beginPath(); ctx.moveTo(L, Y(v)); ctx.lineTo(L+pw, Y(v)); ctx.stroke(); }
+  ctx.strokeStyle = C["ink-2"]; ctx.lineWidth = 1.2;
+  ctx.beginPath(); ctx.moveTo(L, T); ctx.lineTo(L, T+ph); ctx.lineTo(L+pw, T+ph); ctx.stroke();
+  for (let v = 0; v <= 60; v += opt.small ? 20 : 10) label(ctx, String(v), L-6, Y(v), C["ink-2"], fs, 400, "right");
+  M.ticks.forEach((v, i) => { if (opt.small && i % 2 && M.ticks.length > 5) return; label(ctx, fmtNum(v), X(v), T+ph+12, C["ink-2"], fs, 400); });
+  label(ctx, M.xlabel, L + pw/2, H - (opt.small ? 10 : 14), C.ink, fs, 500);
+  ctx.save(); ctx.translate(opt.small ? 11 : 16, T + ph/2); ctx.rotate(-Math.PI/2);
+  label(ctx, opt.small ? "기포 수(개/분)" : "1분 동안 기포 수 (개)", 0, 0, C.ink, fs, 500); ctx.restore();
+
+  // 경향 곡선
+  if (st.showTrend){
+    const base = list.length ? list[0].s : { on:true, d:20, c:1, T:25 };
+    ctx.strokeStyle = C.accent; ctx.lineWidth = 2; ctx.setLineDash([6,5]); ctx.beginPath();
+    for (let i = 0; i <= 80; i++){ const x = M.xmin + (M.xmax - M.xmin)*i/80; const y = M.curve(x, base); i ? ctx.lineTo(X(x), Y(y)) : ctx.moveTo(X(x), Y(y)); }
+    ctx.stroke(); ctx.setLineDash([]);
+  }
+  // 측정값
+  const pts = list.map(r => ({ x:M.x(r.s), y:r.n, bad:r.bad })).sort((a,b) => a.x - b.x);
+  const good = pts.filter(p => !p.bad);
+  if (good.length > 1){
+    ctx.strokeStyle = C.data; ctx.lineWidth = 2; ctx.beginPath();
+    good.forEach((p, i) => i ? ctx.lineTo(X(p.x), Y(p.y)) : ctx.moveTo(X(p.x), Y(p.y))); ctx.stroke();
+  }
+  pts.forEach(p => {
+    ctx.beginPath(); ctx.arc(X(p.x), Y(Math.min(p.y, YMAX)), opt.small ? 4 : 5.5, 0, Math.PI*2);
+    if (p.bad){ ctx.strokeStyle = C.bad; ctx.lineWidth = 2; ctx.stroke(); }
+    else { ctx.fillStyle = C.data; ctx.fill(); ctx.strokeStyle = C.surface; ctx.lineWidth = 1.5; ctx.stroke(); }
+  });
+  if (!pts.length && !st.showTrend) label(ctx, opt.small ? "아직 기록이 없어요" : "결과를 기록하면 여기에 그래프가 그려져요", L + pw/2, T + ph/2, C["ink-2"], fs, 500);
+  if (!opt.small && pts.some(p => p.bad)) label(ctx, "○ 빨간 점: 통제 변인이 달라 선으로 잇지 않음", L + pw - 4, T + 10, C.bad, 12, 500, "right");
+}
+const W2 = 720, H2 = 320;
+const ctx2 = setupCanvas($("c2"), W2, H2);
+const GS = [["g1","light"],["g2","co2"],["g3","temp"]].map(([id, m]) => ({ el:$(id), m, ctx:setupCanvas($(id), 300, 220) }));
+
+/* ---------- 애니메이션 루프 ---------- */
+const views = [
+  { el:$("c1"), draw:drawSim },
+  { el:$("c2"), draw:() => drawGraph(ctx2, W2, H2, st.mission, {}) },
+  ...GS.map(g => ({ el:g.el, draw:() => drawGraph(g.ctx, 300, 220, g.m, { small:true }) }))
+].map(v => ({ ...v, vis:true }));
+if ("IntersectionObserver" in window){
+  const io = new IntersectionObserver(es => es.forEach(e => { const v = views.find(x => x.el === e.target); if (v) v.vis = e.isIntersecting; }));
+  views.forEach(v => io.observe(v.el));
+}
+let last = performance.now();
+function loop(t){
+  const dt = Math.min(0.05, (t - last)/1000); last = t;
+  step(dt);
+  for (const v of views) if (v.vis) v.draw();
+  requestAnimationFrame(loop);
+}
+views.forEach(v => v.draw());
+requestAnimationFrame(loop);
+
+/* ---------- 확인 문제 ---------- */
+const Q = [
+  { q:"빛을 받은 검정말에서 발생하는 기포의 주성분은?", c:["이산화 탄소","산소","질소","수증기"], a:1,
+    e:"광합성 결과 산소가 만들어지므로 기포의 주성분은 산소예요. (꺼져 가는 향불을 넣으면 다시 타오르는 것으로 확인할 수 있어요.)" },
+  { q:"검정말 실험에서 비커에 탄산수소 나트륨을 넣는 까닭은?", c:["물의 온도를 높이기 위해","검정말에 이산화 탄소를 공급하기 위해","기포를 크게 만들기 위해","빛을 더 잘 통과시키기 위해"], a:1,
+    e:"탄산수소 나트륨은 물에 이산화 탄소를 공급해 줘요. 이산화 탄소는 광합성의 재료예요." },
+  { q:"전등을 검정말에 가까이 가져가면 1분 동안 생기는 기포 수는?", c:["줄어든다","늘어난다","변화 없다","기포가 생기지 않는다"], a:1,
+    e:"전등이 가까울수록 빛이 세지므로 광합성이 활발해져 기포가 더 많이 생겨요." },
+  { q:"빛의 세기를 계속 세게 할 때 광합성량의 변화로 옳은 것은?", c:["끝없이 계속 증가한다","증가하다가 어느 정도 이상이면 일정해진다","처음부터 일정하다","증가하다가 급격히 감소한다"], a:1,
+    e:"빛의 세기가 어느 정도 이상이 되면 광합성량은 더 이상 증가하지 않고 일정해져요. 이산화 탄소의 농도도 마찬가지예요." },
+  { q:"온도와 광합성량의 관계를 옳게 설명한 것은?", c:["온도가 높을수록 광합성량이 계속 증가한다","온도는 광합성에 영향을 주지 않는다","일정 온도까지는 증가하다가 그보다 높아지면 급격히 감소한다","온도가 낮을수록 광합성량이 증가한다"], a:2,
+    e:"광합성은 약 30~35 °C까지 활발해지다가, 그보다 높아지면 급격히 줄어들어요." },
+  { q:"‘빛의 세기와 광합성’ 실험에서 통제 변인이 아닌 것은?", c:["물의 온도","탄산수소 나트륨 수용액의 농도","전등과 비커 사이의 거리","검정말의 크기"], a:2,
+    e:"전등과의 거리는 일부러 바꾸는 조작 변인이에요. 나머지는 똑같이 유지해야 하는 통제 변인이에요." }
+];
+const answered = {};
+function buildQuiz(){
+  const box = $("quizBox"); box.innerHTML = ""; Object.keys(answered).forEach(k => delete answered[k]);
+  $("quizScore").textContent = ""; $("quizRetry").style.display = "none";
+  Q.forEach((it, i) => {
+    const d = document.createElement("div"); d.className = "q card";
+    const p = document.createElement("p"); p.textContent = `${i+1}. ${it.q}`; d.appendChild(p);
+    const ch = document.createElement("div"); ch.className = "choices";
+    const fb = document.createElement("div"); fb.className = "fb";
+    it.c.forEach((t, j) => {
+      const b = document.createElement("button"); b.textContent = `${"①②③④"[j]} ${t}`;
+      b.onclick = () => {
+        if (answered[i] !== undefined) return;
+        answered[i] = j === it.a;
+        b.classList.add(j === it.a ? "correct" : "wrong");
+        ch.children[it.a].classList.add("correct");
+        fb.textContent = (j === it.a ? "⭕ 정답! " : "❌ 아쉬워요. ") + it.e;
+        score();
+      };
+      ch.appendChild(b);
+    });
+    d.appendChild(ch); d.appendChild(fb); box.appendChild(d);
+  });
+}
+function score(){
+  const n = Object.keys(answered).length, ok = Object.values(answered).filter(Boolean).length;
+  $("quizScore").textContent = n === Q.length ? `${Q.length}문제 중 ${ok}문제 맞혔어요! ${ok === Q.length ? "🎉 완벽해요!" : ""}` : `${n}/${Q.length} 풀이 중 · 맞힌 문제 ${ok}개`;
+  if (n === Q.length) $("quizRetry").style.display = "";
+}
+$("quizRetry").onclick = buildQuiz;
+buildQuiz();
+
+/* ---------- 예상 정답 공개 (④ 진입 시) ---------- */
+const anaSec = $("analyze");
+const reveal = document.createElement("details"); reveal.className = "card";
+reveal.innerHTML = "<summary>③ 예상해 보기 정답 확인</summary>";
+const rlist = document.createElement("ul"); reveal.appendChild(rlist);
+reveal.addEventListener("toggle", () => {
+  if (!reveal.open) return;
+  rlist.innerHTML = "";
+  Object.entries(MIS).forEach(([k, M]) => {
+    const li = document.createElement("li");
+    const mine = predicted[k] === undefined ? "고르지 않음" : M.po[predicted[k]];
+    li.innerHTML = "";
+    const b = document.createElement("b"); b.textContent = M.title.replace(/^탐구 \d\. /, "") + ": ";
+    li.append(b, document.createTextNode(`정답은 「${M.po[M.pa]}」 · 내 예상: ${mine}. ${M.pe}`));
+    rlist.appendChild(li);
+  });
+});
+anaSec.querySelector(".concept").before(reveal);
+
+/* ---------- 내비게이션 표시 ---------- */
+const navLinks = [...document.querySelectorAll("nav.steps a")];
+if ("IntersectionObserver" in window){
+  const secIO = new IntersectionObserver(es => es.forEach(e => {
+    if (e.isIntersecting){
+      navLinks.forEach(a => a.classList.toggle("on", a.getAttribute("href") === "#"+e.target.id));
+      const on = navLinks.find(a => a.classList.contains("on"));
+      if (on) on.scrollIntoView({block:"nearest", inline:"nearest"});
+    }
+  }), { rootMargin:"-45% 0px -50% 0px" });
+  document.querySelectorAll("main section").forEach(s => secIO.observe(s));
+}
+})();
+</script>
+</body>
+</html>
